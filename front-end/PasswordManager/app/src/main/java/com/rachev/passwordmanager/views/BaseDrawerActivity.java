@@ -3,6 +3,9 @@ package com.rachev.passwordmanager.views;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import butterknife.BindView;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.rachev.passwordmanager.R;
 import com.rachev.passwordmanager.constants.Constants;
 import com.rachev.passwordmanager.views.passwordlist.PasswordsListActivity;
@@ -25,12 +28,19 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity
     {
         PrimaryDrawerItem listSuperheroesItem = new PrimaryDrawerItem()
                 .withIdentifier(PasswordsListActivity.IDENTIFIER)
-                .withIcon(R.drawable.)
+                .withIcon(R.drawable.ic_lock_outline)
                 .withName(Constants.LIST_ACTIVITY_TITLE);
+        
+        AccountHeader header = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.header)
+                .addProfiles(new ProfileDrawerItem().withName(Constants.GUEST_USERNAME))
+                .build();
         
         Drawer drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(mToolbar)
+                .withAccountHeader(header)
                 .addDrawerItems(
                         listSuperheroesItem,
                         new DividerDrawerItem())

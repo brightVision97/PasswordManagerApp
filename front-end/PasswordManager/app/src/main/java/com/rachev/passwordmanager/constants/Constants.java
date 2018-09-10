@@ -10,6 +10,8 @@ public class Constants
     public static final String SECOND_BACK_PRESS_REMINDING_POPUP = "Press again to exit";
     public static final String LIST_ACTIVITY_TITLE = "All passwords";
     
+    public static final String GUEST_USERNAME = "Guest";
+    
     public static final String MEDIA_TYPE_JSON = "application/json";
     
     public static final int PARENT_VIEW_HEIGHT_DIVIDER = 3;
