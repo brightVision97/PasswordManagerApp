@@ -1,6 +1,8 @@
 package com.rachev.passwordmanagerbackend.services;
 
+import com.rachev.passwordmanagerbackend.constants.Constants;
 import com.rachev.passwordmanagerbackend.dao.PasswordManagerDao;
+import com.rachev.passwordmanagerbackend.exceptions.PasswordNotFoundException;
 import com.rachev.passwordmanagerbackend.models.Password;
 import com.rachev.passwordmanagerbackend.services.base.PasswordManagerService;
 import com.rachev.passwordmanagerbackend.utils.crypto.CryptoUtilsImpl;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -56,7 +59,8 @@ public class PasswordManagerDatabaseServiceImpl implements PasswordManagerServic
             {
                 e.printStackTrace();
             }
-        }
+        } else
+            throw new PasswordNotFoundException(Constants.PASSWORD_NOT_FOUND_ERR_MSG);
         
         return null;
     }

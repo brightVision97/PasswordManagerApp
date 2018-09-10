@@ -3,6 +3,7 @@ package com.rachev.passwordmanagerbackend.constants;
 public class Constants
 {
     public static final String VALIDATION_FAILED_ERR_MSG = "Validation failed!";
+    public static final String PASSWORD_NOT_FOUND_ERR_MSG = "Password not found";
     
     public static final String JOINING_DELIMITER = "; ";
     
