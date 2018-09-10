@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import butterknife.BindView;
 import com.rachev.passwordmanager.R;
+import com.rachev.passwordmanager.constants.Constants;
 import com.rachev.passwordmanager.views.passwordlist.PasswordsListActivity;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -24,7 +25,8 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity
     {
         PrimaryDrawerItem listSuperheroesItem = new PrimaryDrawerItem()
                 .withIdentifier(PasswordsListActivity.IDENTIFIER)
-                .withName("All passwords");
+                .withIcon(R.drawable.)
+                .withName(Constants.LIST_ACTIVITY_TITLE);
         
         Drawer drawer = new DrawerBuilder()
                 .withActivity(this)
@@ -75,6 +77,7 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity
     protected void onStart()
     {
         super.onStart();
+        
         setupDrawer();
     }
 }

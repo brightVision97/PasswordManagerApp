@@ -31,7 +31,7 @@ public class PasswordsListActivity extends BaseDrawerActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passwords_list);
-        setTitle("Hello again");
+        setTitle(Constants.LIST_ACTIVITY_TITLE);
         
         ButterKnife.bind(this);
         
@@ -64,7 +64,9 @@ public class PasswordsListActivity extends BaseDrawerActivity
         }
         
         doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT)
+        Toast.makeText(this,
+                Constants.SECOND_BACK_PRESS_REMINDING_POPUP,
+                Toast.LENGTH_SHORT)
                 .show();
     }
     

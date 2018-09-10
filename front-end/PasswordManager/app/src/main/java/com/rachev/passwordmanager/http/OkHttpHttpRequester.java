@@ -1,5 +1,6 @@
 package com.rachev.passwordmanager.http;
 
+import com.rachev.passwordmanager.constants.Constants;
 import com.rachev.passwordmanager.http.base.HttpRequester;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -34,7 +35,7 @@ public class OkHttpHttpRequester implements HttpRequester
     public String post(String url, String bodyString) throws IOException
     {
         RequestBody body = RequestBody.create(
-                MediaType.parse("application/json"),
+                MediaType.parse(Constants.MEDIA_TYPE_JSON),
                 bodyString);
         
         Request request = new Request.Builder()

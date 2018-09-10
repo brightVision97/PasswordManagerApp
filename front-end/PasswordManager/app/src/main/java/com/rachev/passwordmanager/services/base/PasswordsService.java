@@ -9,4 +9,6 @@ public interface PasswordsService
     List<Password> getAllPasswords() throws Exception;
     
     Password getDetailsById(int id) throws Exception;
+    
+    Password createPassword(Password password) throws Exception;
 }

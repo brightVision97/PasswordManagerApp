@@ -1,6 +1,5 @@
 package com.rachev.passwordmanager.repositories;
 
-
 import com.rachev.passwordmanager.http.base.HttpRequester;
 import com.rachev.passwordmanager.parsers.base.JsonParser;
 import com.rachev.passwordmanager.repositories.base.Repository;

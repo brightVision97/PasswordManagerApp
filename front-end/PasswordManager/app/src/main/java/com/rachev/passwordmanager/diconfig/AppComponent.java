@@ -19,6 +19,7 @@ import javax.inject.Singleton;
                 HttpModule.class,
                 RepositoryModule.class,
                 ServicesModule.class,
+                ValidatorsModule.class,
                 AsyncModule.class,
                 ViewsModule.class
         })

@@ -10,6 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.rachev.passwordmanager.R;
+import com.rachev.passwordmanager.constants.Constants;
 import com.rachev.passwordmanager.models.Password;
 
 import javax.inject.Inject;
@@ -34,7 +35,7 @@ public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.Pass
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.password_item, viewGroup, false);
         
-        int height = viewGroup.getMeasuredHeight() / 3;
+        int height = viewGroup.getMeasuredHeight() / Constants.PARENT_VIEW_HEIGHT_DIVIDER;
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = height;
         
