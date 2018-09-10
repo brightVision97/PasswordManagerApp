@@ -7,6 +7,7 @@ public class Constants
     public static final String PASS_EXTRA_KEY = "extra_key";
     
     public static final String INVALID_PASSWORD_ERR_MSG = "Invalid password";
+    public static final String NO_PASSWORDS_ERR_MSG = "No saved passwords";
     public static final String SECOND_BACK_PRESS_REMINDING_POPUP = "Press again to exit";
     public static final String LIST_ACTIVITY_TITLE = "All passwords";
     

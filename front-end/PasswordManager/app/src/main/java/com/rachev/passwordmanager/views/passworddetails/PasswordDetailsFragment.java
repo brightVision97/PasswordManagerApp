@@ -30,7 +30,6 @@ public class PasswordDetailsFragment extends Fragment implements PasswordDetails
     @BindView(R.id.tv_password)
     TextView mPasswordTextView;
     
-    @Inject
     public PasswordDetailsFragment()
     {
         // Required empty public constructor

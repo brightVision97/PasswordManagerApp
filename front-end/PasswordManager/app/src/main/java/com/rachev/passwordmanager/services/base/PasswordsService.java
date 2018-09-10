@@ -11,4 +11,6 @@ public interface PasswordsService
     Password getDetailsById(int id) throws Exception;
     
     Password createPassword(Password password) throws Exception;
+    
+    Password deletePassword(Password password) throws Exception;
 }

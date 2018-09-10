@@ -13,6 +13,7 @@ import android.widget.*;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.rachev.passwordmanager.R;
+import com.rachev.passwordmanager.constants.Constants;
 import com.rachev.passwordmanager.models.Password;
 
 import javax.inject.Inject;
@@ -40,7 +41,6 @@ public class PasswordsListFragment extends Fragment
     @Inject
     PasswordsAdapter mPasswordsAdapter;
     
-    @Inject
     public PasswordsListFragment()
     {
         // Required empty public constructor
@@ -92,7 +92,7 @@ public class PasswordsListFragment extends Fragment
     @Override
     public void showEmptyPasswordsList()
     {
-        Toast.makeText(getContext(), "No superheroes", Toast.LENGTH_LONG)
+        Toast.makeText(getContext(), Constants.NO_PASSWORDS_ERR_MSG, Toast.LENGTH_LONG)
                 .show();
     }
     
