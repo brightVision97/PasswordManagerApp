@@ -30,9 +30,10 @@ public class Password
     {
     }
     
-    public Password(String targetWebsite, String password)
+    public Password(String targetWebsite, String username, String password)
     {
         setTargetWebsite(targetWebsite);
+        setUsername(username);
         setPassword(password);
     }
     

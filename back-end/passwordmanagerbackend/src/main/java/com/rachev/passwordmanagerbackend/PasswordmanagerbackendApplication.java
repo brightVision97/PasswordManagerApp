@@ -31,10 +31,16 @@ public class PasswordmanagerbackendApplication implements CommandLineRunner
     
     private void createPasswordTest()
     {
-        Password password = new Password("Facebook", "123abc");
+        Password password = new Password(
+                "Facebook",
+                "bright",
+                "123abc");
         Password passwordDb = passwordManagerService.createPassword(password);
         
-        password = new Password("Google", "stupidPass101");
+        password = new Password(
+                "Google",
+                "momcheto",
+                "stupidPass101");
         passwordDb = passwordManagerService.createPassword(password);
     }
 }

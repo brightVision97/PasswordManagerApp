@@ -33,7 +33,7 @@ public class CryptoUtilsImpl implements CryptoUtils
                         (byte) 0x56, (byte) 0x35, (byte) 0xE3, (byte) 0x03
                 };
         
-        iterationCount = 19;
+        iterationCount = Constants.CRYPTO_ITERATION_COUNT;
     }
     
     @Override

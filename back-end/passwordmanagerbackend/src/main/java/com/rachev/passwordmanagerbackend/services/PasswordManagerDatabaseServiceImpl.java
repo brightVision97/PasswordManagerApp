@@ -46,8 +46,8 @@ public class PasswordManagerDatabaseServiceImpl implements PasswordManagerServic
             
             try
             {
-                encrpyptedPasswordObj
-                        .setPassword(decrypter.decrypt(
+                encrpyptedPasswordObj.setPassword(
+                        decrypter.decrypt(
                                 ENCRYPTION_KEY,
                                 encrpyptedPasswordObj.getPassword()));
                 
@@ -68,7 +68,8 @@ public class PasswordManagerDatabaseServiceImpl implements PasswordManagerServic
         
         try
         {
-            String encryptedPassword = encrypter.encrypt(ENCRYPTION_KEY,
+            String encryptedPassword = encrypter.encrypt(
+                    ENCRYPTION_KEY,
                     password.getPassword());
             
             password.setPassword(encryptedPassword);
