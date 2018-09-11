@@ -140,6 +140,9 @@ public class PasswordsListFragment extends Fragment
     @Override
     public void showEmptyPasswordsList()
     {
+        mPasswordsAdapter.clear();
+        mPasswordsAdapter.notifyDataSetChanged();
+        
         Toast.makeText(getContext(),
                 Constants.NO_PASSWORDS_ERR_MSG,
                 Toast.LENGTH_LONG)

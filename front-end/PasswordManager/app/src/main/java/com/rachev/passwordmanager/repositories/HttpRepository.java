@@ -46,4 +46,13 @@ public class HttpRepository<T> implements Repository<T>
         
         return mJsonParser.fromJson(responseBody);
     }
+    
+    @Override
+    public T deleteById(int id) throws IOException
+    {
+        String url = mServerUrl + "/" + id;
+        String json = mHttpRequester.delete(url);
+    
+        return mJsonParser.fromJson(json);
+    }
 }

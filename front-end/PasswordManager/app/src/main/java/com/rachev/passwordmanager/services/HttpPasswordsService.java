@@ -41,4 +41,10 @@ public class HttpPasswordsService implements PasswordsService
         
         return mPasswordsRepository.add(password);
     }
+    
+    @Override
+    public Password deletePasswordById(int id) throws Exception
+    {
+        return mPasswordsRepository.deleteById(id);
+    }
 }

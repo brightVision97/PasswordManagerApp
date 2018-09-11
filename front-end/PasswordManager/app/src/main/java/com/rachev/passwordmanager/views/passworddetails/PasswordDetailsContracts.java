@@ -11,6 +11,8 @@ public interface PasswordDetailsContracts
         void setPresenter(Presenter presenter);
         
         void showError(Throwable e);
+        
+        void navigateToHome();
     }
     
     interface Presenter
@@ -20,5 +22,14 @@ public interface PasswordDetailsContracts
         void loadPassword();
         
         void setPasswordId(int id);
+        
+        int getPasswordId();
+        
+        void deletePasswordById(int id);
+    }
+    
+    interface Navigator
+    {
+        void navigateToHome();
     }
 }

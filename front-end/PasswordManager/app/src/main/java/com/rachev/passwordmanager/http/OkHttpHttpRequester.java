@@ -50,4 +50,20 @@ public class OkHttpHttpRequester implements HttpRequester
                 .body()
                 .string();
     }
+    
+    @Override
+    public String delete(String url) throws IOException
+    {
+        Request request = new Request.Builder()
+                .delete()
+                .url(url)
+                .build();
+    
+        OkHttpClient client = new OkHttpClient();
+    
+        return client.newCall(request)
+                .execute()
+                .body()
+                .string();
+    }
 }

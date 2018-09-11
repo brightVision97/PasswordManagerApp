@@ -52,4 +52,26 @@ public class PasswordDetailsPresenter implements PasswordDetailsContracts.Presen
     {
         mPasswordId = id;
     }
+    
+    public int getPasswordId()
+    {
+        return mPasswordId;
+    }
+    
+    @Override
+    public void deletePasswordById(int id)
+    {
+        Disposable disposable = Observable
+                .create((ObservableOnSubscribe<Password>) emitter ->
+                {
+                    Password password = mPasswordsService.deletePasswordById(id);
+                    
+                    //emitter.onNext(password);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.background())
+                .observeOn(mSchedulerProvider.ui())
+                .subscribe(v -> mView.navigateToHome(),
+                        e -> mView.showError(e));
+    }
 }

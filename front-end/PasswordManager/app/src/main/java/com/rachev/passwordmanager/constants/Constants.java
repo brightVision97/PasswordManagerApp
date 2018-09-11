@@ -13,6 +13,7 @@ public class Constants
     
     public static final String PASSWORD_ADDED_MSG = "Password added";
     public static final String PASSWORD_ADD_EMPTY_FIELDS_ERR_MSG = "Please fill all empty fields";
+    public static final String PASSWORD_DELETED_MSG = "Password deleted";
     
     public static final String GUEST_USERNAME = "Guest";
     
