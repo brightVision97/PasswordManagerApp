@@ -10,7 +10,7 @@ public class PasswordManagerApplication extends DaggerApplication
     protected AndroidInjector<? extends DaggerApplication> applicationInjector()
     {
         return DaggerAppComponent.builder()
-                .application(this)
-                .build();
+            .application(this)
+            .build();
     }
 }

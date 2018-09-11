@@ -84,4 +84,12 @@ public class PasswordsListActivity extends BaseDrawerActivity
         
         startActivity(intent);
     }
+    
+    @Override
+    public void navigateToHome()
+    {
+        Intent intent = new Intent(this, PasswordsListActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

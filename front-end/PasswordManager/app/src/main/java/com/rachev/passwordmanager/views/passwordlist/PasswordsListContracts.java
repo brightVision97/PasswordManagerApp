@@ -21,6 +21,8 @@ public interface PasswordsListContracts
         void hideLoading();
         
         void showPasswordDetails(Password password);
+        
+        void navigateToHome();
     }
     
     interface Presenter
@@ -30,10 +32,14 @@ public interface PasswordsListContracts
         void loadPasswords();
         
         void selectPassword(Password password);
+        
+        void addPassword(Password password);
     }
     
     interface Navigator
     {
         void navigateWith(Password password);
+    
+        void navigateToHome();
     }
 }

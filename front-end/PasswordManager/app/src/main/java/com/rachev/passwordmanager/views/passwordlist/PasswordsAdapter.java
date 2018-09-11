@@ -38,7 +38,7 @@ public class PasswordsAdapter extends RecyclerView.Adapter<PasswordsAdapter.Pass
         int height = viewGroup.getMeasuredHeight() / Constants.PARENT_VIEW_HEIGHT_DIVIDER;
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = height;
-        
+
         view.setLayoutParams(layoutParams);
         view.setMinimumHeight(height);
         

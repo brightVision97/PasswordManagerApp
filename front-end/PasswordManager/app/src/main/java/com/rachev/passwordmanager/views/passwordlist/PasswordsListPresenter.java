@@ -57,6 +57,23 @@ public class PasswordsListPresenter implements PasswordsListContracts.Presenter
         mView.showPasswordDetails(password);
     }
     
+    @Override
+    public void addPassword(Password password)
+    {
+        Disposable disposable = Observable
+                .create((ObservableOnSubscribe<Password>) emitter ->
+                {
+                    Password createdPassword = mPasswordsService.createPassword(password);
+                
+                    emitter.onNext(createdPassword);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.background())
+                .observeOn(mSchedulerProvider.ui())
+                .doOnError(mView::showError)
+                .subscribe(p -> mView.navigateToHome());
+    }
+    
     private void presentPasswordsToView(List<Password> passwords)
     {
         if (passwords.isEmpty())

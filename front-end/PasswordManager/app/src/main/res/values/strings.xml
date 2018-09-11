@@ -3,4 +3,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add">Add</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="target_website">Target website</string>
+    <string name="password">Password</string>
+    <string name="delete">Delete</string>
+    <string name="add_new_password">Add new password</string>
 </resources>

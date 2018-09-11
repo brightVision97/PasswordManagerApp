@@ -36,9 +36,9 @@ public class PasswordDetailsPresenter implements PasswordDetailsContracts.Presen
         Disposable disposable = Observable
                 .create((ObservableOnSubscribe<Password>) emitter ->
                 {
-                    Password superhero = mPasswordsService.getDetailsById(mPasswordId);
+                    Password password = mPasswordsService.getDetailsById(mPasswordId);
                     
-                    emitter.onNext(superhero);
+                    emitter.onNext(password);
                     emitter.onComplete();
                 })
                 .subscribeOn(mSchedulerProvider.background())

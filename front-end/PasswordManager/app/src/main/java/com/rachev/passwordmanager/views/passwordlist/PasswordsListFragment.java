@@ -1,9 +1,12 @@
 package com.rachev.passwordmanager.views.passwordlist;
 
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +32,9 @@ public class PasswordsListFragment extends Fragment
 {
     private PasswordsListContracts.Presenter mPresenter;
     private PasswordsListContracts.Navigator mNavigator;
-    private GridLayoutManager mPasswordsViewLayoutManager;
+    private LinearLayoutManager mPasswordsViewLayoutManager;
     private List<Password> mPasswords;
+    private AlertDialog mAlertDialog;
     
     @BindView(R.id.lv_passwords)
     RecyclerView mPasswordsView;
@@ -38,9 +42,13 @@ public class PasswordsListFragment extends Fragment
     @BindView(R.id.loading_view)
     ProgressBar mLoadingView;
     
+    @BindView(R.id.fab)
+    FloatingActionButton mAddPasswordFloatingActionButton;
+    
     @Inject
     PasswordsAdapter mPasswordsAdapter;
     
+    @Inject
     public PasswordsListFragment()
     {
         // Required empty public constructor
@@ -58,8 +66,48 @@ public class PasswordsListFragment extends Fragment
         mPasswordsAdapter.setOnPasswordClickListener(this);
         
         mPasswordsView.setAdapter(mPasswordsAdapter);
-        mPasswordsViewLayoutManager = new GridLayoutManager(getContext(), 2);
+        mPasswordsViewLayoutManager = new LinearLayoutManager(getContext());
         mPasswordsView.setLayoutManager(mPasswordsViewLayoutManager);
+        
+        mAddPasswordFloatingActionButton.setOnClickListener(v ->
+        {
+            AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
+            
+            @SuppressLint("InflateParams")
+            View mView = getActivity().getLayoutInflater()
+                    .inflate(R.layout.dialog_add_password, null);
+            
+            final EditText mUsername = mView.findViewById(R.id.tv_add_username);
+            final EditText mPassword = mView.findViewById(R.id.tv_add_password);
+            final EditText mTargetWebsite = mView.findViewById(R.id.tv_add_website);
+            Button mAddButton = mView.findViewById(R.id.btn_add);
+            
+            mAddButton.setOnClickListener(v1 ->
+            {
+                String username = mUsername.getText().toString();
+                String password = mPassword.getText().toString();
+                String targetWebsite = mTargetWebsite.getText().toString();
+                
+                if (!username.isEmpty() && !password.isEmpty() && !targetWebsite.isEmpty())
+                {
+                    Password passwordToAdd = new Password(username, password, targetWebsite);
+                    mPresenter.addPassword(passwordToAdd);
+                    
+                    Toast.makeText(getContext(),
+                            Constants.PASSWORD_ADDED_MSG,
+                            Toast.LENGTH_SHORT)
+                            .show();
+                } else
+                    Toast.makeText(getContext(),
+                            Constants.PASSWORD_ADD_EMPTY_FIELDS_ERR_MSG,
+                            Toast.LENGTH_SHORT)
+                            .show();
+            });
+            
+            mBuilder.setView(mView);
+            mAlertDialog = mBuilder.create();
+            mAlertDialog.show();
+        });
         
         mPasswords = new ArrayList<>();
         
@@ -92,14 +140,18 @@ public class PasswordsListFragment extends Fragment
     @Override
     public void showEmptyPasswordsList()
     {
-        Toast.makeText(getContext(), Constants.NO_PASSWORDS_ERR_MSG, Toast.LENGTH_LONG)
+        Toast.makeText(getContext(),
+                Constants.NO_PASSWORDS_ERR_MSG,
+                Toast.LENGTH_LONG)
                 .show();
     }
     
     @Override
     public void showError(Throwable ex)
     {
-        Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_LONG)
+        Toast.makeText(getContext(),
+                ex.getMessage(),
+                Toast.LENGTH_LONG)
                 .show();
     }
     
@@ -126,6 +178,13 @@ public class PasswordsListFragment extends Fragment
     public void showPasswordDetails(Password password)
     {
         mNavigator.navigateWith(password);
+    }
+    
+    @Override
+    public void navigateToHome()
+    {
+        mAlertDialog.dismiss();
+        mNavigator.navigateToHome();
     }
     
     @Override

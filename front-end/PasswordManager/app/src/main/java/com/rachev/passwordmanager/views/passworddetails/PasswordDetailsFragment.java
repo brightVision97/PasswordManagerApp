@@ -1,12 +1,12 @@
 package com.rachev.passwordmanager.views.passworddetails;
 
-
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
@@ -30,6 +30,10 @@ public class PasswordDetailsFragment extends Fragment implements PasswordDetails
     @BindView(R.id.tv_password)
     TextView mPasswordTextView;
     
+    @BindView(R.id.btn_delete)
+    Button mPasswordDeleteButton;
+    
+    @Inject
     public PasswordDetailsFragment()
     {
         // Required empty public constructor

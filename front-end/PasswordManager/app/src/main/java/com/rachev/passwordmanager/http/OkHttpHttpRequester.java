@@ -50,24 +50,4 @@ public class OkHttpHttpRequester implements HttpRequester
                 .body()
                 .string();
     }
-    
-    @Override
-    public String delete(String url, String bodyString) throws IOException
-    {
-        RequestBody body = RequestBody.create(
-                MediaType.parse(Constants.MEDIA_TYPE_JSON),
-                bodyString);
-        
-        Request request = new Request.Builder()
-                .delete(body)
-                .url(url)
-                .build();
-    
-        OkHttpClient client = new OkHttpClient();
-    
-        return client.newCall(request)
-                .execute()
-                .body()
-                .string();
-    }
 }

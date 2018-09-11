@@ -46,13 +46,4 @@ public class HttpRepository<T> implements Repository<T>
         
         return mJsonParser.fromJson(responseBody);
     }
-    
-    @Override
-    public T delete(T item) throws IOException
-    {
-        String requestBody = mJsonParser.toJson(item);
-        String responseBody = mHttpRequester.delete(mServerUrl, requestBody);
-        
-        return mJsonParser.fromJson(responseBody);
-    }
 }
