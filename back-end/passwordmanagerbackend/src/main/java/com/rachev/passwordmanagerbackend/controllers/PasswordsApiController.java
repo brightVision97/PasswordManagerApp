@@ -53,4 +53,10 @@ public class PasswordsApiController
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(viewModelToReturn);
     }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deletePasswordById(@PathVariable("id") int id)
+    {
+        passwordManagerService.deletePasswordById(id);
+    }
 }
