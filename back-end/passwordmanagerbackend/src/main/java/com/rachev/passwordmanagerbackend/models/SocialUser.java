@@ -1,5 +1,6 @@
 package com.rachev.passwordmanagerbackend.models;
 
+import com.rachev.passwordmanagerbackend.utils.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "social_media_users")
+@Table(name = Constants.USERS_TABLE)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,20 +19,14 @@ public class SocialUser
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true)
+    @Column(name = Constants.USERS_ID_COLUMN, unique = true)
     private int id;
     
     @NotNull
-    @Column(name = "social_media")
+    @Column(name = Constants.USERS_SOCIAL_MEDIA_COLUMN)
     private String socialMedia;
     
     @NotNull
-    @Column(name = "user_id", unique = true)
+    @Column(name = Constants.USERS_USER_ID_COLUMN, unique = true)
     private String userId;
-    
-    public SocialUser(String socialMedia, String userId)
-    {
-        this.socialMedia = socialMedia;
-        this.userId = userId;
-    }
 }

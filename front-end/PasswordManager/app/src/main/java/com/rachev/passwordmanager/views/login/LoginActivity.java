@@ -10,7 +10,6 @@ import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.rachev.passwordmanager.R;
 import com.rachev.passwordmanager.models.SocialUser;
-import com.rachev.passwordmanager.services.HttpUsersService;
 import com.rachev.passwordmanager.utils.Constants;
 import com.rachev.passwordmanager.views.BaseDrawerActivity;
 import com.rachev.passwordmanager.views.passwordlist.PasswordsListActivity;
@@ -19,8 +18,6 @@ import studios.codelight.smartloginlibrary.users.SmartFacebookUser;
 import studios.codelight.smartloginlibrary.users.SmartGoogleUser;
 import studios.codelight.smartloginlibrary.users.SmartUser;
 import studios.codelight.smartloginlibrary.util.SmartLoginException;
-
-import javax.inject.Inject;
 
 public class LoginActivity extends BaseDrawerActivity implements View.OnClickListener, SmartLoginCallbacks
 {

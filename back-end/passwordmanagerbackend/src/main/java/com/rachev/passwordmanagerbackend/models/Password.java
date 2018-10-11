@@ -32,14 +32,6 @@ public class Password
     private String password;
     
     @NotNull
-    @Column(name = "social_user_acc_id")
+    @Column(name = Constants.PASSWORDS_SOCIAL_USER_ACC_ID_COLUMN)
     private String socialUserAccId;
-    
-    public Password(String targetWebsite, String username, String password, String socialUserAccId)
-    {
-        setTargetWebsite(targetWebsite);
-        setUsername(username);
-        setPassword(password);
-        setSocialUserAccId(socialUserAccId);
-    }
 }

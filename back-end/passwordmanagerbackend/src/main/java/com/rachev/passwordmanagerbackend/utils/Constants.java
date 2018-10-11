@@ -15,4 +15,10 @@ public class Constants
     public static final String PASSWORDS_WEBSITE_COLUMN = "target_website";
     public static final String PASSWORDS_USERNAME_COLUMN = "username";
     public static final String PASSWORDS_PASSWORD_COLUMN = "password";
+    public static final String PASSWORDS_SOCIAL_USER_ACC_ID_COLUMN = "social_user_acc_id";
+    
+    public static final String USERS_TABLE = "social_media_users";
+    public static final String USERS_ID_COLUMN = "id";
+    public static final String USERS_SOCIAL_MEDIA_COLUMN = "social_media";
+    public static final String USERS_USER_ID_COLUMN = "user_id";
 }
