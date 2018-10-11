@@ -1,8 +1,8 @@
 package com.rachev.passwordmanagerbackend.handlers;
 
-import com.rachev.passwordmanagerbackend.constants.Constants;
 import com.rachev.passwordmanagerbackend.exceptions.PasswordNotFoundException;
 import com.rachev.passwordmanagerbackend.models.ErrorDetails;
+import com.rachev.passwordmanagerbackend.utils.Constants;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,8 +34,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     
     @ExceptionHandler(PasswordNotFoundException.class)
     public final ResponseEntity<Object> handleUserNotFoundException(
-            PasswordNotFoundException ex,
-            WebRequest request)
+            PasswordNotFoundException ex, WebRequest request)
     {
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),
@@ -47,19 +46,17 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request)
+            MethodArgumentNotValidException ex, HttpHeaders headers,
+            HttpStatus status, WebRequest request)
     {
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),
-                Constants.VALIDATION_FAILED_ERR_MSG,
+                Constants.VALIDATION_FAILED_MSG,
                 ex.getBindingResult()
                         .getAllErrors()
                         .stream()
                         .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                        .collect(Collectors.joining(Constants.JOINING_DELIMITER)));
+                        .collect(Collectors.joining(Constants.ERR_DELIMITER)));
         
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }

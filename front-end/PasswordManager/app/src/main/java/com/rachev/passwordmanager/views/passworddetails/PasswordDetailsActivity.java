@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import butterknife.ButterKnife;
 import com.rachev.passwordmanager.R;
-import com.rachev.passwordmanager.constants.Constants;
+import com.rachev.passwordmanager.utils.Constants;
 import com.rachev.passwordmanager.models.Password;
 import com.rachev.passwordmanager.views.BaseDrawerActivity;
 import com.rachev.passwordmanager.views.passwordlist.PasswordsListActivity;
@@ -30,8 +30,8 @@ public class PasswordDetailsActivity extends BaseDrawerActivity
         ButterKnife.bind(this);
         
         Intent intent = getIntent();
-        Password password = (Password) intent.getSerializableExtra(Constants.PASS_EXTRA_KEY);
-    
+        Password password = (Password) intent.getSerializableExtra(Constants.PASSWORD_EXTRA_KEY);
+        
         mPasswordDetailsFragment.setNavigator(this);
         mPasswordDetailsPresenter.setPasswordId(password.id);
         mPasswordDetailsFragment.setPresenter(mPasswordDetailsPresenter);

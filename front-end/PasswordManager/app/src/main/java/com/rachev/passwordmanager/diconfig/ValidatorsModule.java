@@ -13,7 +13,7 @@ public class ValidatorsModule
 {
     @Provides
     @Singleton
-    public Validator<Password> superheroValidator()
+    public Validator<Password> passwordValidator()
     {
         return new PasswordValidator();
     }

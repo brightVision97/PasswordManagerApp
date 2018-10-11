@@ -8,16 +8,18 @@ public class Password implements Serializable
     public String username;
     public String password;
     public String targetWebsite;
+    public String socialUserAccId;
     
     public Password()
     {
     }
     
-    public Password(String username, String password, String targetWebsite)
+    public Password(String username, String password, String targetWebsite, String socialUserAccId)
     {
-        this.username = username;
-        this.password = password;
-        this.targetWebsite = targetWebsite;
+        setUsername(username);
+        setPassword(password);
+        setTargetWebsite(targetWebsite);
+        setSocialUserAccId(socialUserAccId);
     }
     
     public int getId()
@@ -25,9 +27,19 @@ public class Password implements Serializable
         return id;
     }
     
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+    
     public String getUsername()
     {
         return username;
+    }
+    
+    public void setUsername(String username)
+    {
+        this.username = username;
     }
     
     public String getPassword()
@@ -35,8 +47,28 @@ public class Password implements Serializable
         return password;
     }
     
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+    
     public String getTargetWebsite()
     {
         return targetWebsite;
+    }
+    
+    public void setTargetWebsite(String targetWebsite)
+    {
+        this.targetWebsite = targetWebsite;
+    }
+    
+    public String getSocialUserAccId()
+    {
+        return socialUserAccId;
+    }
+    
+    public void setSocialUserAccId(String socialUserAccId)
+    {
+        this.socialUserAccId = socialUserAccId;
     }
 }

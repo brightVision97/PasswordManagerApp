@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 import butterknife.ButterKnife;
 import com.rachev.passwordmanager.R;
-import com.rachev.passwordmanager.constants.Constants;
+import com.rachev.passwordmanager.models.SocialUser;
+import com.rachev.passwordmanager.utils.Constants;
 import com.rachev.passwordmanager.models.Password;
 import com.rachev.passwordmanager.views.BaseDrawerActivity;
 import com.rachev.passwordmanager.views.passworddetails.PasswordDetailsActivity;
@@ -37,6 +38,9 @@ public class PasswordsListActivity extends BaseDrawerActivity
         
         setSupportActionBar(getToolbar());
         
+        SocialUser user = (SocialUser) getIntent().getSerializableExtra(Constants.USER_OBJ_EXTRA);
+        mPasswordsListPresenter.addUser(user);
+        
         mPasswordsListFragment.setNavigator(this);
         mPasswordsListFragment.setPresenter(mPasswordsListPresenter);
         
@@ -65,7 +69,7 @@ public class PasswordsListActivity extends BaseDrawerActivity
         
         doubleBackToExitPressedOnce = true;
         Toast.makeText(this,
-                Constants.SECOND_BACK_PRESS_REMINDING_POPUP,
+                Constants.SECOND_BACK_PRESS_TOAST,
                 Toast.LENGTH_SHORT)
                 .show();
     }
@@ -80,7 +84,7 @@ public class PasswordsListActivity extends BaseDrawerActivity
     public void navigateWith(Password password)
     {
         Intent intent = new Intent(this, PasswordDetailsActivity.class);
-        intent.putExtra(Constants.PASS_EXTRA_KEY, password);
+        intent.putExtra(Constants.PASSWORD_EXTRA_KEY, password);
         
         startActivity(intent);
     }

@@ -1,6 +1,7 @@
 package com.rachev.passwordmanager.views.passwordlist;
 
 import com.rachev.passwordmanager.models.Password;
+import com.rachev.passwordmanager.models.SocialUser;
 
 import java.util.List;
 
@@ -29,11 +30,13 @@ public interface PasswordsListContracts
     {
         void subscribe(View view);
         
-        void loadPasswords();
+        void loadPasswords(String userId);
         
         void selectPassword(Password password);
         
         void addPassword(Password password);
+        
+        void addUser(SocialUser user);
     }
     
     interface Navigator

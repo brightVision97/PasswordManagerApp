@@ -3,6 +3,7 @@ package com.rachev.passwordmanager.views.passworddetails;
 import com.rachev.passwordmanager.async.base.SchedulerProvider;
 import com.rachev.passwordmanager.models.Password;
 import com.rachev.passwordmanager.services.base.PasswordsService;
+import com.rachev.passwordmanager.services.base.UsersService;
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
@@ -48,17 +49,6 @@ public class PasswordDetailsPresenter implements PasswordDetailsContracts.Presen
     }
     
     @Override
-    public void setPasswordId(int id)
-    {
-        mPasswordId = id;
-    }
-    
-    public int getPasswordId()
-    {
-        return mPasswordId;
-    }
-    
-    @Override
     public void deletePasswordById(int id)
     {
         Disposable disposable = Observable
@@ -66,12 +56,24 @@ public class PasswordDetailsPresenter implements PasswordDetailsContracts.Presen
                 {
                     Password password = mPasswordsService.deletePasswordById(id);
                     
-                    //emitter.onNext(password);
                     emitter.onComplete();
                 })
                 .subscribeOn(mSchedulerProvider.background())
                 .observeOn(mSchedulerProvider.ui())
                 .subscribe(v -> mView.navigateToHome(),
                         e -> mView.showError(e));
+    }
+    
+    
+    @Override
+    public void setPasswordId(int id)
+    {
+        mPasswordId = id;
+    }
+    
+    @Override
+    public int getPasswordId()
+    {
+        return mPasswordId;
     }
 }

@@ -1,79 +1,45 @@
 package com.rachev.passwordmanagerbackend.models;
 
-import com.rachev.passwordmanagerbackend.constants.Constants;
+import com.rachev.passwordmanagerbackend.utils.Constants;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = Constants.PASSWORDS_DB_TABLE_NAME)
+@Table(name = Constants.PASSWORDS_TABLE)
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Password
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = Constants.PASS_ID_DB_COLUMN_NAME, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = Constants.PASSWORDS_ID_COLUMN, unique = true)
     private int id;
     
     @NotNull
-    @Column(name = Constants.PASS_TARGET_WEBSITE_DB_COLUMN_NAME)
+    @Column(name = Constants.PASSWORDS_WEBSITE_COLUMN)
     private String targetWebsite;
     
     @NotNull
-    @Column(name = Constants.USERNAME_DB_COLUMN_NAME)
+    @Column(name = Constants.PASSWORDS_USERNAME_COLUMN)
     private String username;
     
     @NotNull
-    @Column(name = Constants.PASS_DB_COLUMN_NAME)
+    @Column(name = Constants.PASSWORDS_PASSWORD_COLUMN)
     private String password;
     
-    public Password()
-    {
-    }
+    @NotNull
+    @Column(name = "social_user_acc_id")
+    private String socialUserAccId;
     
-    public Password(String targetWebsite, String username, String password)
+    public Password(String targetWebsite, String username, String password, String socialUserAccId)
     {
         setTargetWebsite(targetWebsite);
         setUsername(username);
         setPassword(password);
-    }
-    
-    public int getId()
-    {
-        return id;
-    }
-    
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-    
-    public String getTargetWebsite()
-    {
-        return targetWebsite;
-    }
-    
-    public void setTargetWebsite(String targetWebsite)
-    {
-        this.targetWebsite = targetWebsite;
-    }
-    
-    public String getUsername()
-    {
-        return username;
-    }
-    
-    public void setUsername(String username)
-    {
-        this.username = username;
-    }
-    
-    public String getPassword()
-    {
-        return password;
-    }
-    
-    public void setPassword(String password)
-    {
-        this.password = password;
+        setSocialUserAccId(socialUserAccId);
     }
 }

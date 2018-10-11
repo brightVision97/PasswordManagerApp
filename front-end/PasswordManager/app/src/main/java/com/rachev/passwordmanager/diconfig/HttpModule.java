@@ -1,6 +1,6 @@
 package com.rachev.passwordmanager.diconfig;
 
-import com.rachev.passwordmanager.constants.Constants;
+import com.rachev.passwordmanager.utils.Constants;
 import com.rachev.passwordmanager.http.OkHttpHttpRequester;
 import com.rachev.passwordmanager.http.base.HttpRequester;
 import dagger.Module;

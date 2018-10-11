@@ -16,8 +16,9 @@ import android.widget.*;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.rachev.passwordmanager.R;
-import com.rachev.passwordmanager.constants.Constants;
+import com.rachev.passwordmanager.utils.Constants;
 import com.rachev.passwordmanager.models.Password;
+import studios.codelight.smartloginlibrary.UserSessionManager;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class PasswordsListFragment extends Fragment
     private LinearLayoutManager mPasswordsViewLayoutManager;
     private List<Password> mPasswords;
     private AlertDialog mAlertDialog;
+    private String mUserId;
     
     @BindView(R.id.lv_passwords)
     RecyclerView mPasswordsView;
@@ -87,19 +89,20 @@ public class PasswordsListFragment extends Fragment
                 String username = mUsername.getText().toString();
                 String password = mPassword.getText().toString();
                 String targetWebsite = mTargetWebsite.getText().toString();
+                String socialUserAccId = UserSessionManager.getCurrentUser(getContext()).getUserId();
                 
                 if (!username.isEmpty() && !password.isEmpty() && !targetWebsite.isEmpty())
                 {
-                    Password passwordToAdd = new Password(username, password, targetWebsite);
+                    Password passwordToAdd = new Password(username, password, targetWebsite, socialUserAccId);
                     mPresenter.addPassword(passwordToAdd);
                     
                     Toast.makeText(getContext(),
-                            Constants.PASSWORD_ADDED_MSG,
+                            Constants.PASSWORD_ADDED_TOAST,
                             Toast.LENGTH_SHORT)
                             .show();
                 } else
                     Toast.makeText(getContext(),
-                            Constants.PASSWORD_ADD_EMPTY_FIELDS_ERR_MSG,
+                            Constants.PASSWORD_NOT_ALL_FIELDS_FILLED_TOAST,
                             Toast.LENGTH_SHORT)
                             .show();
             });
@@ -120,7 +123,7 @@ public class PasswordsListFragment extends Fragment
         super.onResume();
         
         mPresenter.subscribe(this);
-        mPresenter.loadPasswords();
+        mPresenter.loadPasswords(UserSessionManager.getCurrentUser(getContext()).getUserId());
     }
     
     @Override
@@ -144,7 +147,7 @@ public class PasswordsListFragment extends Fragment
         mPasswordsAdapter.notifyDataSetChanged();
         
         Toast.makeText(getContext(),
-                Constants.NO_PASSWORDS_ERR_MSG,
+                Constants.NO_PASSWORDS_TOAST,
                 Toast.LENGTH_LONG)
                 .show();
     }
@@ -186,7 +189,9 @@ public class PasswordsListFragment extends Fragment
     @Override
     public void navigateToHome()
     {
-        mAlertDialog.dismiss();
+        if (mAlertDialog != null)
+            mAlertDialog.dismiss();
+        
         mNavigator.navigateToHome();
     }
     

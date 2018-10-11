@@ -10,7 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.rachev.passwordmanager.R;
-import com.rachev.passwordmanager.constants.Constants;
+import com.rachev.passwordmanager.utils.Constants;
 import com.rachev.passwordmanager.models.Password;
 
 import javax.inject.Inject;

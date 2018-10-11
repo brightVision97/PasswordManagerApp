@@ -1,16 +1,15 @@
 package com.rachev.passwordmanagerbackend.services;
 
-import com.rachev.passwordmanagerbackend.constants.Constants;
-import com.rachev.passwordmanagerbackend.dao.PasswordManagerDao;
-import com.rachev.passwordmanagerbackend.exceptions.PasswordNotFoundException;
 import com.rachev.passwordmanagerbackend.models.Password;
+import com.rachev.passwordmanagerbackend.models.SocialUser;
+import com.rachev.passwordmanagerbackend.repositories.PasswordsRepository;
+import com.rachev.passwordmanagerbackend.repositories.UsersRepository;
 import com.rachev.passwordmanagerbackend.services.base.PasswordManagerService;
 import com.rachev.passwordmanagerbackend.utils.crypto.CryptoUtilsImpl;
 import com.rachev.passwordmanagerbackend.utils.crypto.base.CryptoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,75 +17,78 @@ public class PasswordManagerDatabaseServiceImpl implements PasswordManagerServic
 {
     private static final String ENCRYPTION_KEY = "cRZsiLXIczVyczOp4wqgBlbre0tXSzYZ";
     
-    private final PasswordManagerDao passwordManagerDao;
+    private final PasswordsRepository passwordsRepository;
+    private final UsersRepository usersRepository;
+    private final CryptoUtils cryptoUtils;
+    
+    {
+        cryptoUtils = new CryptoUtilsImpl();
+    }
     
     @Autowired
-    public PasswordManagerDatabaseServiceImpl(PasswordManagerDao passwordManagerDao)
+    public PasswordManagerDatabaseServiceImpl(PasswordsRepository passwordsRepository,
+                                              UsersRepository usersRepository)
     {
-        this.passwordManagerDao = passwordManagerDao;
+        this.passwordsRepository = passwordsRepository;
+        this.usersRepository = usersRepository;
     }
     
     @Override
     public List<Password> getAllPasswords()
     {
-        List<Password> passwords = new ArrayList<>();
-        passwordManagerDao.findAll().forEach(passwords::add);
-        
-        return passwords;
+        return passwordsRepository.findAll();
     }
     
     @Override
-    public Password findPasswordById(int id)
+    public Password getPasswordById(int id)
     {
-        if (passwordManagerDao.findById(id).isPresent())
-        {
-            CryptoUtils decrypter = new CryptoUtilsImpl();
-            
-            Password encrpyptedPasswordObj =
-                    passwordManagerDao.findById(id)
-                            .get();
-            
-            try
-            {
-                encrpyptedPasswordObj.setPassword(
-                        decrypter.decrypt(
-                                ENCRYPTION_KEY,
-                                encrpyptedPasswordObj.getPassword()));
-                
-                return encrpyptedPasswordObj;
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        } else
-            throw new PasswordNotFoundException(Constants.PASSWORD_NOT_FOUND_ERR_MSG);
+        Password password = null;
         
-        return null;
+        if (passwordsRepository.findById(id).isPresent())
+            password = passwordsRepository.findById(id).get();
+        
+        try
+        {
+            password.setPassword(cryptoUtils.decrypt(ENCRYPTION_KEY,
+                    password.getPassword()));
+        } catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
+        
+        return password;
     }
     
     @Override
     public Password createPassword(Password password)
     {
-        CryptoUtils encrypter = new CryptoUtilsImpl();
-        
         try
         {
-            String encryptedPassword = encrypter.encrypt(
-                    ENCRYPTION_KEY,
-                    password.getPassword());
-            
-            password.setPassword(encryptedPassword);
+            password.setPassword(cryptoUtils.encrypt(ENCRYPTION_KEY,
+                    password.getPassword()));
         } catch (Exception e)
         {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         
-        return passwordManagerDao.save(password);
+        return passwordsRepository.save(password);
     }
     
     @Override
     public void deletePasswordById(int id)
     {
-        passwordManagerDao.deleteById(id);
+        passwordsRepository.deleteById(id);
+    }
+    
+    @Override
+    public List<SocialUser> getAllUsers()
+    {
+        return usersRepository.findAll();
+    }
+    
+    @Override
+    public SocialUser addUser(SocialUser user)
+    {
+        return usersRepository.save(user);
     }
 }

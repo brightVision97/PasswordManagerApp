@@ -16,6 +16,6 @@ public abstract class PasswordDetailsModule
     
     @ActivityScoped
     @Binds
-    abstract PasswordDetailsContracts.Presenter superheroesListPresenter(PasswordDetailsPresenter presenter);
+    abstract PasswordDetailsContracts.Presenter passwordsListPresenter(PasswordDetailsPresenter presenter);
 }
 

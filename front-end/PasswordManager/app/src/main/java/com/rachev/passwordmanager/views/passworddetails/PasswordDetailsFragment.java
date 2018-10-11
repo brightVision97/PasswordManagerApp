@@ -12,7 +12,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.rachev.passwordmanager.R;
-import com.rachev.passwordmanager.constants.Constants;
+import com.rachev.passwordmanager.utils.Constants;
 import com.rachev.passwordmanager.models.Password;
 
 import javax.inject.Inject;
@@ -23,8 +23,8 @@ import javax.inject.Inject;
 @SuppressWarnings("deprecation")
 public class PasswordDetailsFragment extends Fragment implements PasswordDetailsContracts.View
 {
-    private PasswordDetailsContracts.Presenter mPresenter;
     private PasswordDetailsContracts.Navigator mNavigator;
+    private PasswordDetailsContracts.Presenter mPresenter;
     
     @BindView(R.id.tv_username)
     TextView mUsernameTextView;
@@ -55,7 +55,7 @@ public class PasswordDetailsFragment extends Fragment implements PasswordDetails
             mPresenter.deletePasswordById(mPresenter.getPasswordId());
             
             Toast.makeText(getContext(),
-                    Constants.PASSWORD_DELETED_MSG,
+                    Constants.PASSWORD_DELETED_TOAST,
                     Toast.LENGTH_SHORT)
                     .show();
             
@@ -88,15 +88,16 @@ public class PasswordDetailsFragment extends Fragment implements PasswordDetails
     }
     
     @Override
+    public void setNavigator(PasswordDetailsContracts.Navigator navigator)
+    {
+        mNavigator = navigator;
+    }
+    
+    @Override
     public void showError(Throwable e)
     {
         Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG)
                 .show();
-    }
-    
-    public void setNavigator(PasswordDetailsContracts.Navigator navigator)
-    {
-        mNavigator = navigator;
     }
     
     @Override

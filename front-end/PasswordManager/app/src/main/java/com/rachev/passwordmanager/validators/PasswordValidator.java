@@ -1,6 +1,6 @@
 package com.rachev.passwordmanager.validators;
 
-import com.rachev.passwordmanager.constants.Constants;
+import com.rachev.passwordmanager.utils.Constants;
 import com.rachev.passwordmanager.models.Password;
 import com.rachev.passwordmanager.validators.base.Validator;
 

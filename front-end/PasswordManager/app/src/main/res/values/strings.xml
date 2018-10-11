@@ -2,12 +2,23 @@
     <string name="app_name">PasswordManager</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add">Add</string>
     <string name="email">Email</string>
     <string name="username">Username</string>
     <string name="target_website">Target website</string>
-    <string name="password">Password</string>
     <string name="delete">Delete</string>
     <string name="add_new_password">Add new password</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">No account yet? Create one</string>
+    <string name="name">Name</string>
+    <string name="user_profile_picture">User profile picture</string>
+    <string name="facebook_app_id">268763730411020</string>
+    <string name="fb_login_protocol_scheme">fb268763730411020</string>
+    <string name="logout">Logout</string>
+    <string name="sign_in_facebook">Sign in Facebook</string>
+    <string name="sign_in_google">Sign in Google</string>
+    <string name="rate_app">Rate app</string>
+    <string name="app_version">Version: 1.0</string>
+    <string name="developer">Developer: Ivan Rachev</string>
 </resources>

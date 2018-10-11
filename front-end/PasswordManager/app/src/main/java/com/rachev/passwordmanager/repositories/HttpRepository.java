@@ -23,8 +23,7 @@ public class HttpRepository<T> implements Repository<T>
     @Override
     public List<T> getAll() throws IOException
     {
-        String passwordsJson = null;
-        passwordsJson = mHttpRequester.get(mServerUrl);
+        String passwordsJson = mHttpRequester.get(mServerUrl);
         
         return mJsonParser.fromJsonArray(passwordsJson);
     }
@@ -52,7 +51,7 @@ public class HttpRepository<T> implements Repository<T>
     {
         String url = mServerUrl + "/" + id;
         String json = mHttpRequester.delete(url);
-    
+        
         return mJsonParser.fromJson(json);
     }
 }

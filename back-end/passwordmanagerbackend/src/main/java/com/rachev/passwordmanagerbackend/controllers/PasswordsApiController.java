@@ -2,59 +2,44 @@ package com.rachev.passwordmanagerbackend.controllers;
 
 import com.rachev.passwordmanagerbackend.models.Password;
 import com.rachev.passwordmanagerbackend.services.base.PasswordManagerService;
-import com.rachev.passwordmanagerbackend.utils.mapper.base.PasswordMapper;
-import com.rachev.passwordmanagerbackend.viewmodels.PasswordViewModel;
+import com.rachev.passwordmanagerbackend.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/passwords")
+@RequestMapping(Constants.PASSWORDS_ROOT_REQUEST_MAPPING)
 public class PasswordsApiController
 {
     private final PasswordManagerService passwordManagerService;
-    private final PasswordMapper mapper;
     
     @Autowired
-    public PasswordsApiController(PasswordManagerService passwordManagerService,
-                                  PasswordMapper mapper)
+    public PasswordsApiController(PasswordManagerService passwordManagerService)
     {
         this.passwordManagerService = passwordManagerService;
-        this.mapper = mapper;
     }
     
-    @RequestMapping(method = RequestMethod.GET)
-    public List<PasswordViewModel> getAllPasswords()
+    @GetMapping()
+    public List<Password> getAllPasswords()
     {
-        List<Password> models = passwordManagerService.getAllPasswords();
-        
-        return mapper.mapMany(models);
+        return passwordManagerService.getAllPasswords();
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public PasswordViewModel getPasswordById(@PathVariable("id") int id)
+    @GetMapping(value = "/{id}")
+    public Password getPasswordById(@PathVariable("id") int id)
     {
-        Password model = passwordManagerService.findPasswordById(id);
-        
-        return mapper.map(model);
+        return passwordManagerService.getPasswordById(id);
     }
     
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<PasswordViewModel> createPassword(
-            @RequestBody PasswordViewModel passwordViewModel)
+    @PostMapping
+    public Password createPassword(@RequestBody Password password)
     {
-        Password model = mapper.map(passwordViewModel);
-        Password password = passwordManagerService.createPassword(model);
-        PasswordViewModel viewModelToReturn = mapper.map(password);
+        return passwordManagerService.createPassword(password);
         
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(viewModelToReturn);
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public void deletePasswordById(@PathVariable("id") int id)
     {
         passwordManagerService.deletePasswordById(id);

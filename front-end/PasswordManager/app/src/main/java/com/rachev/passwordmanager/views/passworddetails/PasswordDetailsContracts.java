@@ -10,6 +10,8 @@ public interface PasswordDetailsContracts
         
         void setPresenter(Presenter presenter);
         
+        void setNavigator(Navigator navigator);
+        
         void showError(Throwable e);
         
         void navigateToHome();
